@@ -12032,6 +12032,8 @@ void Player::SendPreparedGossip(WorldObject* pSource)
     if (uint32 menuId = PlayerTalkClass->GetGossipMenu().GetMenuId())
         textId = GetGossipTextId(menuId, pSource);
 
+    if (textId == DEFAULT_GOSSIP_MESSAGE) return;
+
     PlayerTalkClass->SendGossipMenu(textId, pSource->GetObjectGuid());
 }
 
