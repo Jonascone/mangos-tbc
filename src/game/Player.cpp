@@ -2125,7 +2125,7 @@ GameObject* Player::GetGameObjectIfCanInteractWith(ObjectGuid guid, uint32 gameo
             }
 
             if (go->IsWithinDistInMap(this, maxdist) && go->isSpawned())
-                return go;
+                return NULL;
 
             sLog.outError("GetGameObjectIfCanInteractWith: GameObject '%s' [GUID: %u] is too far away from player %s [GUID: %u] to be used by him (distance=%f, maximal %f is allowed)",
                           go->GetGOInfo()->name,  go->GetGUIDLow(), GetName(), GetGUIDLow(), go->GetDistance(this), maxdist);
@@ -12032,6 +12032,7 @@ void Player::SendPreparedGossip(WorldObject* pSource)
     if (uint32 menuId = PlayerTalkClass->GetGossipMenu().GetMenuId())
         textId = GetGossipTextId(menuId, pSource);
 
+    // If no gossip text is available, don't display the default message because it's pointless.
     if (textId == DEFAULT_GOSSIP_MESSAGE) return;
 
     PlayerTalkClass->SendGossipMenu(textId, pSource->GetObjectGuid());
