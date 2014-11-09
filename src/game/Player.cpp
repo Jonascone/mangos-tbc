@@ -12033,7 +12033,7 @@ void Player::SendPreparedGossip(WorldObject* pSource)
         textId = GetGossipTextId(menuId, pSource);
 
     // If no gossip text is available, don't display the default message because it's pointless.
-    if (textId == DEFAULT_GOSSIP_MESSAGE) return;
+    if (pSource->GetTypeId() == TYPEID_GAMEOBJECT && textId == DEFAULT_GOSSIP_MESSAGE) return;
 
     PlayerTalkClass->SendGossipMenu(textId, pSource->GetObjectGuid());
 }
